@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cafe&Wifi API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #result {
+            margin-top: 20px;
+        }
+        .cafe {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Cafe & Wifi  ☕ API</h1>
+    <a href="https://documenter.getpostman.com/view/37494551/2sA3rzJBz8" target="_blank">Click here for Complete API Documentation</a>
+
+    <h2>Search for Cafes by Location</h2>
+    <form id="searchForm">
+        <label for="location">Enter Location:</label>
+        <input type="text" id="location" name="location" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const location = document.getElementById('location').value;
+            fetch(`/search?loc=${location}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = '';
+                    if (data.cafes && data.cafes.length > 0) {
+                        data.cafes.forEach(cafe => {
+                            const cafeDiv = document.createElement('div');
+                            cafeDiv.className = 'cafe';
+                            cafeDiv.innerHTML = `
+                                <h3>${cafe.name}</h3>
+                                <p><strong>Location:</strong> ${cafe.location}</p>
+                                <p><strong>Seats:</strong> ${cafe.seats}</p>
+                                <p><strong>Has Toilet:</strong> ${cafe.has_toilet ? 'Yes' : 'No'}</p>
+                                <p><strong>Has Wifi:</strong> ${cafe.has_wifi ? 'Yes' : 'No'}</p>
+                                <p><strong>Has Sockets:</strong> ${cafe.has_sockets ? 'Yes' : 'No'}</p>
+                                <p><strong>Can Take Calls:</strong> ${cafe.can_take_calls ? 'Yes' : 'No'}</p>
+                                <p><strong>Coffee Price:</strong> ${cafe.coffee_price}</p>
+                            `;
+                            resultDiv.appendChild(cafeDiv);
+                        });
+                    } else {
+                        resultDiv.innerHTML = '<p>No cafes found at this location.</p>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>
