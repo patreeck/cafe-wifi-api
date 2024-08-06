@@ -1,4 +1,8 @@
-Cafe & Wifi API
+**Complete API Documentation** : https://documenter.getpostman.com/view/37494551/2sA3rzJBz8
+
+
+
+**Cafe & Wifi API**
 
 
 A Flask-based API for managing a database of cafes. Includes endpoints to retrieve, add, update, and delete cafes. Features an interactive web interface for searching cafes by location. Utilizes SQLAlchemy for database operations and returns data in JSON format.
@@ -6,13 +10,13 @@ A Flask-based API for managing a database of cafes. Includes endpoints to retrie
 
 
 
-Features
+**Features**
 
 
-Database Management: Create, read, update, and delete cafe records using SQLAlchemy.
+**Database Management:** Create, read, update, and delete cafe records using SQLAlchemy.
 
 
-API Endpoints:
+**API Endpoints:**
 
 GET /random: Retrieve a random cafe.
 
